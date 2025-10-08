@@ -8,14 +8,15 @@ The project now has a **clean, focused documentation structure**:
 **Location:** `/README.md`
 
 **Contains:**
-- ✅ Project overview and features
+- ✅ Project overview and features (including new upload feature!)
 - ✅ Quick start guide (step-by-step setup)
 - ✅ Project structure
-- ✅ Dataset information (5 sample resumes)
+- ✅ Dataset information (27 resumes from friends + colleagues)
 - ✅ How to run locally (backend + frontend)
+- ✅ Resume upload feature guide (NEW!)
 - ✅ Complete troubleshooting guide
 - ✅ Testing guide with test cases
-- ✅ API endpoints documentation
+- ✅ API endpoints documentation (including upload endpoints)
 - ✅ Configuration options
 - ✅ Technology stack
 - ✅ Design choices and tradeoffs
@@ -23,36 +24,18 @@ The project now has a **clean, focused documentation structure**:
 
 This is your **single source of truth** for all project documentation!
 
-### 2. **resumes/README.md** (Dataset Documentation)
-**Location:** `/resumes/README.md`
+### 2. **UPLOAD_FEATURE.md** (Upload Feature Guide) 🆕
+**Location:** `/UPLOAD_FEATURE.md`
 
 **Contains:**
-- Dataset source information
-- Details about each resume
-- How to add more resumes
-- Production considerations
+- Complete implementation details
+- API documentation for upload endpoints
+- Testing guide for upload functionality
+- Security and privacy notes
+- Technical flow diagrams
+- Best practices
 
-### 3. **.github/copilot-instructions.md** (Developer Context)
-**Location:** `.github/copilot-instructions.md`
 
-**Contains:**
-- Project structure for AI assistant
-- Tech stack summary
-- Key features overview
-
----
-
-## 🗑️ Files Removed (Redundant Documentation)
-
-These files were removed as their content is now consolidated in README.md:
-
-- ❌ `QUICKSTART.md` - Content moved to Quick Start section in README
-- ❌ `PROJECT_SUMMARY.md` - Content merged into README overview
-- ❌ `START_HERE.md` - Content integrated into README
-- ❌ `FIXES_APPLIED.md` - Recent fixes documented in README
-- ❌ `FIXES_SUMMARY.md` - Implementation details in README
-
----
 
 ## 📖 Where to Find Information
 
@@ -71,6 +54,7 @@ These files were removed as their content is now consolidated in README.md:
 
 ### For Testing:
 **Read:** `README.md` → Testing Guide section
+**Read:** `UPLOAD_FEATURE.md` → Testing Guide section (for upload tests)
 
 ### For Dataset Info:
 **Read:** `resumes/README.md`
@@ -79,11 +63,13 @@ These files were removed as their content is now consolidated in README.md:
 
 ## 🎯 Benefits of This Structure
 
-✅ **Single Source of Truth**: One comprehensive README  
+✅ **Single Source of Truth**: One comprehensive README for core functionality  
+✅ **Detailed Feature Docs**: Separate guides for major features (Upload)  
+✅ **Visual Aids**: Dedicated UI/UX guide with diagrams  
 ✅ **No Redundancy**: No duplicate information  
-✅ **Easy to Maintain**: Update one file instead of many  
+✅ **Easy to Maintain**: Organized by topic  
 ✅ **Professional**: Standard open-source project structure  
-✅ **Complete**: All necessary information in one place  
+✅ **Complete**: All necessary information well-organized  
 
 ---
 
@@ -94,20 +80,23 @@ Cv_App/
 ├── .github/
 │   └── copilot-instructions.md      # AI assistant context
 ├── backend/                          # Python FastAPI backend
-│   ├── main.py
+│   ├── main.py                       # ⭐ Updated with upload endpoints
 │   ├── resume_processor.py
 │   ├── generate_sample_resumes.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── temp_uploads/                 # 🆕 Temporary upload storage
 ├── frontend/                         # React + Vite frontend
 │   ├── src/
-│   │   ├── App.jsx
-│   │   └── App.css
+│   │   ├── App.jsx                   # ⭐ Updated with upload UI
+│   │   └── App.css                   # ⭐ Updated with upload styles
 │   ├── package.json
 │   └── vite.config.js
-├── resumes/                          # Sample PDF resumes (5 files)
-│   ├── *.pdf
+├── resumes/                          # 27 PDF resumes (real data)
+│   ├── *.pdf                         # 21 from friends + 5 samples
 │   └── README.md                     # Dataset documentation
-└── README.md                         # ⭐ Main documentation (START HERE)
+├── README.md                         # ⭐ Main documentation (START HERE)
+├── UPLOAD_FEATURE.md                 # 🆕 Upload feature guide
+└── DOCUMENTATION.md                  # This file (structure overview)
 ```
 
 ---
@@ -116,7 +105,24 @@ Cv_App/
 
 1. **Read** `README.md` from top to bottom
 2. **Follow** the Quick Start section to run the app
-3. **Test** using the example queries provided
-4. **Explore** the codebase using the Project Structure guide
+3. **Try** the new upload feature:
+   - Click "📤 Upload Resumes"
+   - Select your own PDF resumes
+   - Search through them!
+4. **Test** using the example queries provided
+5. **Explore** the codebase using the Project Structure guide
 
-That's it! Everything you need is in **README.md**. 📖
+## 🆕 What's New
+
+### Resume Upload Feature (Just Added!)
+- ✅ Upload temporary CVs via UI
+- ✅ Switch between local and uploaded sources
+- ✅ Real-time source switching
+- ✅ Clear uploaded files anytime
+- ✅ No persistence (security-focused)
+
+**See `UPLOAD_FEATURE.md` for complete details!**
+
+---
+
+That's it! Everything you need is organized and ready to use. 📖

@@ -16,6 +16,8 @@ A full-stack AI-powered resume search application that helps hiring managers fin
 - 📱 **Modern UI**: Clean, responsive chat interface for seamless interaction
 - 🔗 **Resume Access**: Direct links to original resume PDFs (opens in new tab)
 - ❓ **"I'm not sure" Fallback**: Returns helpful message when no good matches are found
+- 📤 **Resume Upload**: Upload temporary CVs or use local resume folder
+- 🔄 **Dual Source Mode**: Switch between local resumes and uploaded resumes on-the-fly
 
 ## 🚀 Quick Start
 
@@ -180,12 +182,30 @@ The frontend will run on **http://localhost:5173**
 ### Step 4: Use the Application
 
 1. Open your browser and go to **http://localhost:5173**
-2. Type a natural language query in the search box, such as:
+2. **Choose Resume Source**:
+   - **Option A - Local Folder** (default): Uses resumes from `/resumes` folder (27 resumes)
+   - **Option B - Upload Resumes**: Click "📤 Upload Resumes" to upload your own PDF files temporarily
+3. Type a natural language query in the search box, such as:
    - "Find me candidates with React and Node.js experience"
    - "Who has worked in fintech?"
    - "Show me data scientists with machine learning experience"
-3. View matching candidates with their skills, experience, and match explanations
-4. Click "View Resume" to access the original PDF (demo alert in current version)
+4. View matching candidates with their skills, experience, and match explanations
+5. Click "View Resume" to open the PDF in a new tab
+
+### Resume Upload Feature
+
+**Upload your own resumes temporarily:**
+1. Click "📤 Upload Resumes" button
+2. Select one or multiple PDF files from your computer
+3. The system will automatically index them and switch to "Uploaded" mode
+4. Start searching through your uploaded resumes
+5. Click "🗑️ Clear Uploads" to remove uploaded files and return to local mode
+
+**Benefits:**
+- ✅ Test the system with your own candidate pool
+- ✅ No need to modify the local `/resumes` folder
+- ✅ Uploaded files are temporary and not persisted
+- ✅ Switch between local and uploaded sources anytime
 
 ## 🛠️ Technology Stack
 
@@ -280,7 +300,8 @@ The frontend will run on **http://localhost:5173**
 - [ ] Persistent storage with database (PostgreSQL + pgvector)
 - [ ] User authentication and multi-tenant support
 - [ ] Advanced filtering (years of experience, location, education)
-- [ ] Resume upload functionality via UI
+- [x] Resume upload functionality via UI ✅ (Completed)
+- [x] Switch between local and uploaded resume sources ✅ (Completed)
 - [ ] PDF viewer integrated in the interface
 - [ ] Export search results to CSV/Excel
 - [ ] Email notifications for saved searches
@@ -288,6 +309,8 @@ The frontend will run on **http://localhost:5173**
 - [ ] A/B testing different embedding models
 - [ ] Analytics dashboard for hiring managers
 - [ ] Integration with ATS (Applicant Tracking Systems)
+- [ ] Drag-and-drop file upload with preview
+- [ ] Save uploaded resumes permanently (optional)
 
 ## 🧪 Testing
 
@@ -387,7 +410,38 @@ curl -X POST http://localhost:8000/search \
    http://localhost:8000/resume/Sarah_Johnson_Senior_React_Developer.pdf
    ```
 
-4. **API Documentation**
+4. **Upload Resumes**
+   ```powershell
+   # Upload multiple PDF files
+   curl -X POST http://localhost:8000/upload-resumes `
+     -F "files=@resume1.pdf" `
+     -F "files=@resume2.pdf"
+   ```
+
+5. **Set Resume Source**
+   ```powershell
+   # Switch to local resumes
+   curl -X POST http://localhost:8000/set-resume-source `
+     -H "Content-Type: application/json" `
+     -d '{"source": "local"}'
+   
+   # Switch to uploaded resumes
+   curl -X POST http://localhost:8000/set-resume-source `
+     -H "Content-Type: application/json" `
+     -d '{"source": "uploaded"}'
+   ```
+
+6. **Get Uploaded Resumes List**
+   ```powershell
+   curl http://localhost:8000/uploaded-resumes
+   ```
+
+7. **Clear Uploaded Resumes**
+   ```powershell
+   curl -X DELETE http://localhost:8000/clear-uploads
+   ```
+
+8. **API Documentation**
    ```
    http://localhost:8000/docs
    ```
@@ -427,7 +481,28 @@ Steps:
 4. URL: http://localhost:8000/resume/[filename].pdf
 ```
 
-#### Test 5: Chat Interface
+#### Test 5: Resume Upload Feature
+```
+Steps:
+1. Click "📤 Upload Resumes" button in the UI
+2. Select multiple PDF resume files
+3. Verify: Files are uploaded and indexed
+4. Verify: UI switches to "Uploaded" mode
+5. Search query works with uploaded resumes
+6. Click "🗑️ Clear Uploads" to remove and return to local
+```
+
+#### Test 6: Source Switching
+```
+Steps:
+1. Start with local resumes (default)
+2. Upload some PDFs
+3. Switch between "Local" and "Uploaded" radio buttons
+4. Verify: Search results change based on selected source
+5. Verify: Status bar shows correct indexed count
+```
+
+#### Test 7: Chat Interface
 ```
 Steps:
 1. Type multiple queries in sequence
